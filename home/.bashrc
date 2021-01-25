@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+echo 'Your 1650 graphics card needs the driver: Nvidia-Linuxx86_64-430.09 as of 1-1-2021'
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
