@@ -2,13 +2,12 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-echo 'Your 1650 graphics card needs the driver: Nvidia-Linuxx86_64-430.09 as of 1-1-2021'
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
+
 
 # echo -e '\n>be me \n'
 # don't put duplicate lines or lines starting with space in the history.
@@ -50,8 +49,7 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# We have color support; assume it's compliant with Ecma-48 # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
 	# a case would tend to support setf rather than setaf.)
 	color_prompt=yes
     else
@@ -62,11 +60,14 @@ fi
 if [ "$color_prompt" = yes ]; then
     fortune | cowsay
     echo -e  "\n"
-    PS1='\[\033[38;5;244m\][\T] ${debian_chroot:+($debian_chroot)}\[\033[38;5;69m\]\u\[\033[00m\]@\[\033[38;5;204m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[38;5;46m\]\$\[\033[00m\] '
+    PS1='\[\033[38;5;244m\][\T]\[\033[32;32m\]$(__git_ps1 " (%s)") ${debian_chroot:+($debian_chroot)}\[\033[38;5;69m\]\u\[\033[00m\]@\[\033[38;5;204m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[38;5;46m\]\$\[\033[00m\] ' 
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
+
+# Append path
+export PATH="$HOME/Notes/util/bin:$PATH"
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
@@ -96,6 +97,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+export FZF_DEFAULT_COMMAND='find .'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -120,3 +122,4 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+. "$HOME/.cargo/env"
