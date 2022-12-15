@@ -6,8 +6,7 @@
 #
 
 # i3 config file (v4)
-#
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+# # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
 
@@ -28,28 +27,35 @@ font pango:monospace 8
 
 
 #Alias colors
-set $bg     #2c2c2e
-set $fg     #9f9f9f
-set $hi     #efef8f
-set $ac     #d4faff
-set $tx     #040404
-set $ia     #8f8f8f
-set $be     #8faf9f
-set $yw     #ccdc90
-set $gn     #88b090
-set $rd     #e89393
+#set $bg     #2c2c2e
+#set $fg     #9f9f9f
+#set $hi     #efef8f
+#set $ac     #d4faff
+#set $tx     #040404
+#set $ia     #8f8f8f
+#set $be     #8faf9f
+#set $yw     #ccdc90
+#set $gn     #88b090
+#set $rd     #e89393
 
-client.focused              $ac        $ac         $tx
-client.unfocused            $bg        $bg         $ia
-client.focused_inactive     $bg        $bg         $ac
-client.urgent               $rd        $rd         $tx
+#client.focused              $ac        $ac         $tx
+#client.unfocused            $bg        $bg         $ia
+#client.focused_inactive     $bg        $bg         $ac
+#client.urgent               $rd        $rd         $tx
 
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+
+client.background       #F8F8F2
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -58,8 +64,10 @@ bindsym $mod+Shift+q kill
 new_window 1pixel
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
-bindsym $mod+space exec i3-dmenu-desktop
+bindsym $mod+space exec i3-dmenu-desktop "--dmenu=dmenu -c -l 5 -i -sb '#6272A4' -sf '#F8F8F2' -fn '#e89393' -fn 'Jet Brains Mono-17'"
+#bindsym $mod+space exec i3-dmenu-desktop "--dmenu=dmenu -c -l 5 -i -nf '#F8F8F2' -nb '#282A36' -sb '#6272A4' -sf '#F8F8F2' -fn DejaVu Sans Mono-17'"
+#bindsym $mod+d exec dmenu_run -sb '#D4FAFF' -sf '#040404' -fn '#e89393'
+#bindsym $mod+d exec i3-dmenu-desktop -- -sb '#D4FAFF' -sf '#040404' -fn '#e89393'
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -96,7 +104,10 @@ bindsym $mod+semicolon split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Control+f fullscreen toggle
+
+# toggle bar
+bindsym $mod+f exec --no-startup-id i3bartoggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -118,7 +129,7 @@ bindsym $mod+a focus parent
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1 ≥"
-set $ws2 "2 🎮"
+set $ws2 "2 💻"
 set $ws3 "3 🌏"
 set $ws4 "4 ♫"
 set $ws5 "5"
@@ -151,13 +162,6 @@ bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
 bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
-
-# App workspaces
-assign [class="Xfce4-terminal"] $ws1
-assign [class="Steam"] $ws2
-assign [class="Firefox-esr"] $ws3
-assign [class="Spotify"] $ws4
-for_window [class="Spotify"] move to workspace $ws4
 
 #floats
 for_window [class="Yad"] floating enable border pixel 0
@@ -199,23 +203,32 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3blocks -c /etc/i3blocks.conf
+        mode dock
 	    position top	
         bindsym button1 nop
         font pango:monospace 10 
 
+    #colors {
+    #    background          $bg
+    #    statusline          $fg
+    #    separator           $hi
+    #    focused_workspace   $gn        $bg        $ac
+    #    active_workspace    $gn        $ac        $tx
+    #    inactive_workspace  $bg        $bg        $ia
+    #    urgent_workspace    $rd        $bg        $ac
+    #}
     colors {
-        background          $bg
-        statusline          $fg
-        separator           $hi
-        focused_workspace   $gn        $bg        $ac
-        active_workspace    $gn        $ac        $tx
-        inactive_workspace  $bg        $bg        $ia
-        urgent_workspace    $rd        $bg        $ac
-    }
+    background #282A36
+    statusline #F8F8F2
+    separator  #44475A
+
+    focused_workspace  #44475A #44475A #F8F8F2
+    active_workspace   #282A36 #44475A #F8F8F2
+    inactive_workspace #282A36 #282A36 #BFBFBF
+    urgent_workspace   #FF5555 #FF5555 #F8F8F2
+    binding_mode       #FF5555 #FF5555 #F8F8F2
+  }
 }
 
 # Autostartup
-exec_always --no-startup-id xfce4-terminal;
-exec_always --no-startup-id steam;
-exec_always --no-startup-id firefox;
-exec_always --no-startup-id spotify;
+exec --no-startup-id autostart;
