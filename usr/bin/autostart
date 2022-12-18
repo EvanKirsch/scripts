@@ -1,8 +1,16 @@
 #!/bin/bash
 
 feh --bg-fill ~/Pictures/bg/bg.jpg &
+compton &
 alacritty &
 nm-applet &
+firefox &
+spotify &
+
+sleep 2
+i3-msg '[class="Firefox-esr"] move to workspace 3 🌏'
+i3-msg '[class="Spotify"] move to workspace 4 ♫'
+
 sleep .5
 i3-msg '[class="alacritty"] move to workspace 1 ≥'
 
@@ -11,11 +19,6 @@ while ["$(hostname -I)" = ""]; do
 done
 
 steam &
-firefox &
-spotify &
 
-sleep 2
-i3-msg '[class="Firefox-esr"] move to workspace 3 🌏'
-i3-msg '[class="Spotify"] move to workspace 4 ♫'
-sleep 6
+sleep 8
 i3-msg '[class="Steam"] move to workspace 2 💻'
