@@ -41,6 +41,10 @@ apt update
 # Steam
 apt install -y steam
 
+# Bluetooth
+apt install -y blueman \
+    libspa-0.2-bluetooth
+
 # Nvidia Drivers
 apt install -y nvidia-detect \
     nvidia-driver
