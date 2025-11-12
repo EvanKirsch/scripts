@@ -6,3 +6,6 @@
 1. run pushEtcConfigs.sh as super user
 1. run pushHomeConfigs.sh
 1. copy /i3blocks/* to /user/share/i3blocks/
+
+### WIP 
+1. adding support for symbolic links to ensure files are maintained 
