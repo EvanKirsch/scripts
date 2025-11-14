@@ -11,11 +11,11 @@ ln -s $SCRIPT_DIR/home/.profile ~/.profile
 # vim configs
 ln -s $SCRIPT_DIR/home/.vimrc ~/.vimrc
 
-# i3 configs
+# alacritty configs
 ln -s $SCRIPT_DIR/home/.config/alacritty ~/.config/alacritty
 
 # doom configs
 ln -s $SCRIPT_DIR/home/.config/doom ~/.config/doom
 
-# alacritty configs
+# i3 configs
 ln -s $SCRIPT_DIR/home/.config/i3 ~/.config/i3
